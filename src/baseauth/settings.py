@@ -287,7 +287,7 @@ DATABASES = {
         'NAME': env.str('POSTGRES_DB', default=f'django_{PROJECT_NAME}'),
         'USER': env.str('POSTGRES_USER', default=f'django_{PROJECT_NAME}'),
         'PASSWORD': env.str('POSTGRES_PASSWORD', default=f'password_{PROJECT_NAME}'),
-        'HOST': f'{PROJECT_NAME}-postgres' if DOCKER else 'localhost',
+        'HOST': f'{PROJECT_NAME}-postgres' if DOCKER else '127.0.0.1',
         'PORT': env.str('POSTGRES_PORT', default='5432'),
     }
 }
@@ -445,6 +445,7 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 CORS_ALLOW_CREDENTIALS = env.bool('CORS_ALLOW_CREDENTIALS', default=False)
 CORS_ALLOW_ALL_ORIGINS = env.bool('CORS_ALLOW_ALL_ORIGINS', default=False)
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[])
+
 
 HOME_REDIRECT = reverse_lazy('cas_login')
 
@@ -630,3 +631,6 @@ SHOWROOM_API_PATH = env.str('SHOWROOM_API_PATH', default='api/v1/')
 SHOWROOM_API_BASE = f'{SHOWROOM_BASE_URL}{SHOWROOM_API_PATH}'
 SHOWROOM_API_KEY = env.str('SHOWROOM_API_KEY', default=None)
 WORKER_DELAY = 3
+
+# Default to baseauth: 
+AUTOCOMPLETE_SOURCE = env.str('AUTOCOMPLETE_SOURCE', default='baseauth')
